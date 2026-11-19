@@ -27,7 +27,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.PostgreSql;
+using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.AspNetCore;
 using Volo.Abp.Modularity;
@@ -41,15 +41,16 @@ using Volo.Abp.Timing;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation.Urls;
+using Volo.Abp.Uow;
 
 namespace BioTrace.Elsa.Abp;
 
 [DependsOn(
     typeof(AbpHttpApiModule),
-    typeof(ElsaAbpHostPostgreSqlModule),
+    typeof(ElsaAbpHostSqliteModule),
     typeof(ElsaAbpMultiTenancyModule),
     typeof(EntityFrameworkCore.AbpEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCorePostgreSqlModule),
+    typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
@@ -134,8 +135,15 @@ public class AbpHttpApiHostModule : AbpModule
 
         Configure<AbpDbContextOptions>(options =>
         {
-            options.UseNpgsql(npgsql =>
-                npgsql.MigrationsAssembly(typeof(AbpHttpApiHostModule).Assembly.FullName));
+            options.UseSqlite(sqlite =>
+                sqlite.MigrationsAssembly(typeof(AbpHttpApiHostModule).Assembly.FullName));
+        });
+
+        // SQLite allows one write transaction per file; an ambient request transaction
+        // would block nested requiresNew UoWs (e.g. security log saves) on a second connection.
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
         });
 
         Configure<AbpDbConnectionOptions>(options =>

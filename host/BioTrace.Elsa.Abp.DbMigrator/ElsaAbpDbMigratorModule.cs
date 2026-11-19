@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Autofac;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.PostgreSql;
+using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -16,10 +16,10 @@ namespace BioTrace.Elsa.Abp;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(ElsaAbpDbMigratorPostgreSqlModule),
+    typeof(ElsaAbpDbMigratorSqliteModule),
     typeof(ElsaAbpMultiTenancyModule),
     typeof(EntityFrameworkCore.AbpEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCorePostgreSqlModule),
+    typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpIdentityEntityFrameworkCoreModule),
     typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
@@ -42,8 +42,8 @@ public class ElsaAbpDbMigratorModule : AbpModule
 
         Configure<AbpDbContextOptions>(options =>
         {
-            options.UseNpgsql(npgsql =>
-                npgsql.MigrationsAssembly("BioTrace.Elsa.Abp.HttpApi.Host"));
+            options.UseSqlite(sqlite =>
+                sqlite.MigrationsAssembly("BioTrace.Elsa.Abp.HttpApi.Host"));
         });
 
         Configure<ElsaAbpOptions>(options =>

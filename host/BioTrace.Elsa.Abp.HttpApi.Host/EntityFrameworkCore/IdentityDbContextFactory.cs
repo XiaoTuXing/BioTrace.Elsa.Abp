@@ -14,8 +14,8 @@ public class IdentityDbContextFactory : IDesignTimeDbContextFactory<IdentityDbCo
             ?? configuration.GetConnectionString(AbpDbProperties.ConnectionStringName)!;
 
         var builder = new DbContextOptionsBuilder<IdentityDbContext>();
-        builder.UseNpgsql(connectionString, npgsql =>
-            npgsql.MigrationsAssembly(typeof(IdentityDbContextFactory).Assembly.FullName));
+        builder.UseSqlite(connectionString, sqlite =>
+            sqlite.MigrationsAssembly(typeof(IdentityDbContextFactory).Assembly.FullName));
         return new IdentityDbContext(builder.Options);
     }
 

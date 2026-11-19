@@ -9,10 +9,10 @@ using Volo.Abp.Modularity;
 namespace BioTrace.Elsa.Abp;
 
 /// <summary>
-/// Demonstration DbMigrator: wires Elsa Management/Runtime to PostgreSQL.
+/// Demonstration host: wires Elsa Management/Runtime to SQLite via Elsa.Persistence.EFCore.Sqlite.
 /// </summary>
 [DependsOn(typeof(ElsaAbpMultiTenancyModule))]
-public class ElsaAbpDbMigratorPostgreSqlModule : ElsaAbpAspNetCoreModule
+public class ElsaAbpHostSqliteModule : ElsaAbpAspNetCoreModule
 {
     protected override void ConfigureElsaPersistence(IModule elsa, ElsaAbpOptions options)
     {
@@ -20,7 +20,7 @@ public class ElsaAbpDbMigratorPostgreSqlModule : ElsaAbpAspNetCoreModule
         {
             management.UseEntityFrameworkCore(ef =>
             {
-                ef.UsePostgreSql(ResolveElsaConnectionString);
+                ef.UseSqlite(ResolveElsaConnectionString);
                 ef.RunMigrations = false;
             });
         });
@@ -29,7 +29,7 @@ public class ElsaAbpDbMigratorPostgreSqlModule : ElsaAbpAspNetCoreModule
         {
             runtime.UseEntityFrameworkCore(ef =>
             {
-                ef.UsePostgreSql(ResolveElsaConnectionString);
+                ef.UseSqlite(ResolveElsaConnectionString);
                 ef.RunMigrations = false;
             });
         });

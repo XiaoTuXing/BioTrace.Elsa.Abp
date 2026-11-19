@@ -3,6 +3,7 @@ using BioTrace.Elsa.Abp.Data;
 using Serilog;
 using Serilog.Events;
 using Volo.Abp.Data;
+using Volo.Abp.Uow;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -28,7 +29,18 @@ try
         await scope.ServiceProvider.GetRequiredService<ElsaAbpHostDatabaseMigrationHostedService>()
             .StartAsync(CancellationToken.None);
         await scope.ServiceProvider.MigrateElsaDatabasesAsync();
-        await scope.ServiceProvider.GetRequiredService<IDataSeeder>().SeedAsync();
+
+        // SQLite permits a single write transaction per file. DataSeeder's [UnitOfWork]
+        // interceptor would otherwise open an ambient transaction spanning all contributors,
+        // blocking each contributor's own requiresNew transaction. Seed inside a
+        // non-transactional UoW so every contributor commits independently.
+        var unitOfWorkManager = scope.ServiceProvider.GetRequiredService<IUnitOfWorkManager>();
+        using (var uow = unitOfWorkManager.Begin(requiresNew: true, isTransactional: false))
+        {
+            await scope.ServiceProvider.GetRequiredService<IDataSeeder>().SeedAsync();
+            await uow.CompleteAsync();
+        }
+
         await scope.ServiceProvider.GetRequiredService<ElsaAbpTenantDemoWorkflowSeeder>().SeedAsync();
     }
 

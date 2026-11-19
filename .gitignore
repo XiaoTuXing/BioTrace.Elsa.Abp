@@ -194,6 +194,8 @@ PublishScripts/
 
 # NuGet Packages
 *.nupkg
+# Offline NuGet feed is intentionally committed
+!offline-packages/*.nupkg
 # NuGet Symbol Packages
 *.snupkg
 # The packages folder can be ignored because of Package Restore
@@ -424,3 +426,7 @@ test/BioTrace.Elsa.Abp.E2E/blob-report/
 
 # dotnet user-secrets
 **/Properties/secrets.json
+
+# Local SQLite databases & restore test cache
+App_Data/
+.restore-test-cache/

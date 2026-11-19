@@ -18,8 +18,8 @@ public class AbpHttpApiHostDbContextFactory : IDesignTimeDbContextFactory<AbpDbC
 
         var connectionString = configuration.GetConnectionString(AbpDbProperties.ConnectionStringName)!;
         var builder = new DbContextOptionsBuilder<AbpDbContext>();
-        builder.UseNpgsql(connectionString, npgsql =>
-            npgsql.MigrationsAssembly(typeof(AbpHttpApiHostDbContextFactory).Assembly.FullName));
+        builder.UseSqlite(connectionString, sqlite =>
+            sqlite.MigrationsAssembly(typeof(AbpHttpApiHostDbContextFactory).Assembly.FullName));
         return new AbpDbContext(builder.Options);
     }
 }

@@ -79,14 +79,18 @@ public class ElsaAbpMultiTenancyHostDataSeedContributor : ElsaAbpPermissionDataS
     protected virtual async Task<Guid> EnsureTenantIdAsync(string tenantName)
     {
         var normalizedName = _tenantNormalizer.NormalizeName(tenantName);
-        var tenant = await _tenantRepository.FindByNameAsync(normalizedName);
-        if (tenant != null)
-        {
-            return tenant.Id;
-        }
 
+        // Keep every DB access inside this short-lived UoW: a context opened in the
+        // DataSeeder ambient UoW would hold the SQLite write lock until all contributors finish.
         using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: true))
         {
+            var tenant = await _tenantRepository.FindByNameAsync(normalizedName);
+            if (tenant != null)
+            {
+                await uow.CompleteAsync();
+                return tenant.Id;
+            }
+
             tenant = await _tenantManager.CreateAsync(tenantName);
             await _tenantRepository.InsertAsync(tenant, autoSave: true);
             await uow.CompleteAsync();
@@ -102,6 +106,10 @@ public class ElsaAbpMultiTenancyHostDataSeedContributor : ElsaAbpPermissionDataS
         string designerEmail)
     {
         using (CurrentTenant.Change(tenantId))
+        // SQLite allows only one write transaction per file: commit this contributor's
+        // writes in its own UoW instead of the DataSeeder ambient UoW, which stays open
+        // until every contributor finishes and would block later contributors.
+        using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: true))
         {
             var adminRole = await SeedRoleAsync("admin", "Administrator");
             var designerRole = await SeedRoleAsync("designer", "Workflow Designer");
@@ -124,6 +132,8 @@ public class ElsaAbpMultiTenancyHostDataSeedContributor : ElsaAbpPermissionDataS
             await GrantRolePermissionsAsync(designerRole.Name,
                 AbpElsaPermissions.WorkflowDefinitions.Read,
                 AbpElsaPermissions.WorkflowInstances.Read);
+
+            await uow.CompleteAsync();
         }
     }
 }

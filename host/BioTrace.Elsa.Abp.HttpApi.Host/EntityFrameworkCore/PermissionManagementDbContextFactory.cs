@@ -14,8 +14,8 @@ public class PermissionManagementDbContextFactory : IDesignTimeDbContextFactory<
             ?? configuration.GetConnectionString(AbpDbProperties.ConnectionStringName)!;
 
         var builder = new DbContextOptionsBuilder<PermissionManagementDbContext>();
-        builder.UseNpgsql(connectionString, npgsql =>
-            npgsql.MigrationsAssembly(typeof(PermissionManagementDbContextFactory).Assembly.FullName));
+        builder.UseSqlite(connectionString, sqlite =>
+            sqlite.MigrationsAssembly(typeof(PermissionManagementDbContextFactory).Assembly.FullName));
         return new PermissionManagementDbContext(builder.Options);
     }
 

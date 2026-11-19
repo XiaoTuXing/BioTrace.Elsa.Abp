@@ -14,8 +14,8 @@ public class TenantManagementDbContextFactory : IDesignTimeDbContextFactory<Tena
             ?? configuration.GetConnectionString(AbpDbProperties.ConnectionStringName)!;
 
         var builder = new DbContextOptionsBuilder<TenantManagementDbContext>();
-        builder.UseNpgsql(connectionString, npgsql =>
-            npgsql.MigrationsAssembly(typeof(TenantManagementDbContextFactory).Assembly.FullName));
+        builder.UseSqlite(connectionString, sqlite =>
+            sqlite.MigrationsAssembly(typeof(TenantManagementDbContextFactory).Assembly.FullName));
         return new TenantManagementDbContext(builder.Options);
     }
 

@@ -15,11 +15,11 @@ namespace BioTrace.Elsa.Abp.Migrations.PermissionManagement
                 name: "AbpPermissionGrants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,10 +30,10 @@ namespace BioTrace.Elsa.Abp.Migrations.PermissionManagement
                 name: "AbpPermissionGroups",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    DisplayName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,18 +44,18 @@ namespace BioTrace.Elsa.Abp.Migrations.PermissionManagement
                 name: "AbpPermissions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    GroupName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ResourceName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ManagementPermissionName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    ParentName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    DisplayName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    IsEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    MultiTenancySide = table.Column<byte>(type: "smallint", nullable: false),
-                    Providers = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    StateCheckers = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    GroupName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ResourceName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ManagementPermissionName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    ParentName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    IsEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    MultiTenancySide = table.Column<byte>(type: "INTEGER", nullable: false),
+                    Providers = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    StateCheckers = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,13 +66,13 @@ namespace BioTrace.Elsa.Abp.Migrations.PermissionManagement
                 name: "AbpResourcePermissionGrants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ProviderName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ProviderKey = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    ResourceName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ResourceKey = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    ResourceName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ResourceKey = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,7 +103,7 @@ namespace BioTrace.Elsa.Abp.Migrations.PermissionManagement
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpResourcePermissionGrants_TenantId_Name_ResourceName_Reso~",
+                name: "IX_AbpResourcePermissionGrants_TenantId_Name_ResourceName_ResourceKey_ProviderName_ProviderKey",
                 table: "AbpResourcePermissionGrants",
                 columns: new[] { "TenantId", "Name", "ResourceName", "ResourceKey", "ProviderName", "ProviderKey" },
                 unique: true);

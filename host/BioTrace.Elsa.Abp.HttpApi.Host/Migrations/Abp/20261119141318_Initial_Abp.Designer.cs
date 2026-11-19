@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
@@ -12,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace BioTrace.Elsa.Abp.Migrations.Abp
 {
     [DbContext(typeof(AbpDbContext))]
-    [Migration("20260604033538_Initial_Abp")]
+    [Migration("20261119141318_Initial_Abp")]
     partial class Initial_Abp
     {
         /// <inheritdoc />
@@ -20,11 +19,8 @@ namespace BioTrace.Elsa.Abp.Migrations.Abp
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.PostgreSql)
-                .HasAnnotation("ProductVersion", "10.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+                .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.Sqlite)
+                .HasAnnotation("ProductVersion", "10.0.9");
 #pragma warning restore 612, 618
         }
     }

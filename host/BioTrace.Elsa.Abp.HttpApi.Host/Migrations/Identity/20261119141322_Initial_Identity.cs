@@ -15,17 +15,17 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpClaimTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Required = table.Column<bool>(type: "boolean", nullable: false),
-                    IsStatic = table.Column<bool>(type: "boolean", nullable: false),
-                    Regex = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    RegexDescription = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
-                    Description = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    ValueType = table.Column<int>(type: "integer", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsStatic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Regex = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    RegexDescription = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ValueType = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,11 +36,11 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpLinkUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SourceUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SourceTenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    TargetUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TargetTenantId = table.Column<Guid>(type: "uuid", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SourceUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SourceTenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    TargetUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TargetTenantId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,21 +51,21 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpOrganizationUnits",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ParentId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Code = table.Column<string>(type: "character varying(95)", maxLength: 95, nullable: false),
-                    DisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    EntityVersion = table.Column<int>(type: "integer", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Code = table.Column<string>(type: "TEXT", maxLength: 95, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    EntityVersion = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,17 +81,17 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpRoles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    IsDefault = table.Column<bool>(type: "boolean", nullable: false),
-                    IsStatic = table.Column<bool>(type: "boolean", nullable: false),
-                    IsPublic = table.Column<bool>(type: "boolean", nullable: false),
-                    EntityVersion = table.Column<int>(type: "integer", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsStatic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsPublic = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EntityVersion = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,21 +102,21 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpSecurityLogs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ApplicationName = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
-                    Identity = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
-                    Action = table.Column<string>(type: "character varying(96)", maxLength: 96, nullable: true),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    TenantName = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ClientId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    CorrelationId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    ClientIpAddress = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    BrowserInfo = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ApplicationName = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    Identity = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    Action = table.Column<string>(type: "TEXT", maxLength: 96, nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    TenantName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    CorrelationId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    ClientIpAddress = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    BrowserInfo = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,17 +127,17 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpSessions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SessionId = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    Device = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    DeviceInfo = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClientId = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    IpAddresses = table.Column<string>(type: "character varying(2048)", maxLength: 2048, nullable: true),
-                    SignedIn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastAccessed = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SessionId = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Device = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    DeviceInfo = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    IpAddresses = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: true),
+                    SignedIn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LastAccessed = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -148,12 +148,12 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserDelegations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    SourceUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TargetUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    SourceUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TargetUserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,39 +164,39 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    Name = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    Surname = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    PasswordHash = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    SecurityStamp = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    IsExternal = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
-                    ShouldChangePasswordOnNextLogin = table.Column<bool>(type: "boolean", nullable: false),
-                    EntityVersion = table.Column<int>(type: "integer", nullable: false),
-                    LastPasswordChangeTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LastSignInTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    Leaved = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    ExtraProperties = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
-                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    Surname = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    IsExternal = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", maxLength: 16, nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    ShouldChangePasswordOnNextLogin = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EntityVersion = table.Column<int>(type: "INTEGER", nullable: false),
+                    LastPasswordChangeTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LastSignInTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    Leaved = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    ExtraProperties = table.Column<string>(type: "TEXT", nullable: false),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,17 +207,17 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpOrganizationUnitRoles",
                 columns: table => new
                 {
-                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true)
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    OrganizationUnitId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AbpOrganizationUnitRoles", x => new { x.OrganizationUnitId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AbpOrganizationUnitRoles_AbpOrganizationUnits_OrganizationU~",
+                        name: "FK_AbpOrganizationUnitRoles_AbpOrganizationUnits_OrganizationUnitId",
                         column: x => x.OrganizationUnitId,
                         principalTable: "AbpOrganizationUnits",
                         principalColumn: "Id",
@@ -234,11 +234,11 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ClaimType = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ClaimType = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,11 +255,11 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ClaimType = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ClaimValue = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ClaimType = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    ClaimValue = table.Column<string>(type: "TEXT", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -276,11 +276,11 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserLogins",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    ProviderKey = table.Column<string>(type: "character varying(196)", maxLength: 196, nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 196, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -297,17 +297,17 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserOrganizationUnits",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrganizationUnitId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    OrganizationUnitId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AbpUserOrganizationUnits", x => new { x.OrganizationUnitId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_AbpUserOrganizationUnits_AbpOrganizationUnits_OrganizationU~",
+                        name: "FK_AbpUserOrganizationUnits_AbpOrganizationUnits_OrganizationUnitId",
                         column: x => x.OrganizationUnitId,
                         principalTable: "AbpOrganizationUnits",
                         principalColumn: "Id",
@@ -324,10 +324,10 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserPasskeys",
                 columns: table => new
                 {
-                    CredentialId = table.Column<byte[]>(type: "bytea", maxLength: 1024, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Data = table.Column<string>(type: "jsonb", nullable: true)
+                    CredentialId = table.Column<byte[]>(type: "BLOB", maxLength: 1024, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Data = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -344,10 +344,10 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserPasswordHistories",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Password = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -364,9 +364,9 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -389,11 +389,11 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 name: "AbpUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LoginProvider = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Value = table.Column<string>(type: "text", nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    TenantId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -407,7 +407,7 @@ namespace BioTrace.Elsa.Abp.Migrations.Identity
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpLinkUsers_SourceUserId_SourceTenantId_TargetUserId_Targe~",
+                name: "IX_AbpLinkUsers_SourceUserId_SourceTenantId_TargetUserId_TargetTenantId",
                 table: "AbpLinkUsers",
                 columns: new[] { "SourceUserId", "SourceTenantId", "TargetUserId", "TargetTenantId" },
                 unique: true);

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BioTrace.Elsa.Abp.Studio.Client": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50761;http://localhost:50762"
+    }
+  }
+}

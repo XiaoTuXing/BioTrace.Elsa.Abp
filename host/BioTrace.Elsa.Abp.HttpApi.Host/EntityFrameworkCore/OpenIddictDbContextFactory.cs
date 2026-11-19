@@ -14,8 +14,8 @@ public class OpenIddictDbContextFactory : IDesignTimeDbContextFactory<OpenIddict
             ?? configuration.GetConnectionString(AbpDbProperties.ConnectionStringName)!;
 
         var builder = new DbContextOptionsBuilder<OpenIddictDbContext>();
-        builder.UseNpgsql(connectionString, npgsql =>
-            npgsql.MigrationsAssembly(typeof(OpenIddictDbContextFactory).Assembly.FullName));
+        builder.UseSqlite(connectionString, sqlite =>
+            sqlite.MigrationsAssembly(typeof(OpenIddictDbContextFactory).Assembly.FullName));
         return new OpenIddictDbContext(builder.Options);
     }
 
